@@ -1,13 +1,13 @@
-import Card from '../card/card';
+import { Films } from '../../types/film';
+import Logo from '../logo/logo';
+import FilmList from '../filmList/filmList';
+import Footer from '../footer/footer';
 
-type FilmInHeader = {
-  name: string;
-  genre:string;
-  year: number;
+type MainProps = {
+  films: Films;
 }
 
-
-function Main({ name = 'The Grand Budapest Hotel', genre = 'Drama', year = 2014}: FilmInHeader) {
+function Main({films}: MainProps): JSX.Element {
   return (
     <body>
 
@@ -20,11 +20,7 @@ function Main({ name = 'The Grand Budapest Hotel', genre = 'Drama', year = 2014}
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <Logo />
           </div>
 
           <ul className="user-block">
@@ -46,10 +42,10 @@ function Main({ name = 'The Grand Budapest Hotel', genre = 'Drama', year = 2014}
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
+              <h2 className="film-card__title">{films[0].name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{films[0].genre}</span>
+                <span className="film-card__year">{films[0].released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -108,50 +104,15 @@ function Main({ name = 'The Grand Budapest Hotel', genre = 'Drama', year = 2014}
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-
-
-          </div>
+          <FilmList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <Footer />
 
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </body >
   );

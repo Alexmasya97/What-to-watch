@@ -1,7 +1,18 @@
-function Player(){
-  return(
+import {useParams} from 'react-router-dom';
+import { Films } from '../../types/film';
+
+type PlayerProps = {
+  films: Films;
+}
+
+function Player({ films }: PlayerProps): JSX.Element {
+
+  const { id } = useParams<{ id: string }>(); // Берем параметр id из URL
+  const film = films.find((f) => f.id === Number(id)); // Находим фильм по id
+
+  return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={film?.video_link} className="player__video" poster={film?.poster_image}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -17,7 +28,7 @@ function Player(){
         <div className="player__controls-row">
           <button type="button" className="player__play">
             <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
+              <use href="#play-s"></use>
             </svg>
             <span>Play</span>
           </button>
@@ -25,7 +36,7 @@ function Player(){
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
+              <use href="#full-screen"></use>
             </svg>
             <span>Full screen</span>
           </button>
@@ -34,4 +45,5 @@ function Player(){
     </div>
   );
 }
+
 export default Player;
